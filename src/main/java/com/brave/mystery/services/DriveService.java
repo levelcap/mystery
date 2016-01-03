@@ -29,7 +29,7 @@ public class DriveService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DriveService.class);
     private static final String JSON = "{\"web\":{\"client_id\":\"456405405866-2ru5bltgivtr2hntllk4bbalruss73pv.apps.googleusercontent.com\",\"project_id\":\"inlaid-plasma-117917\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://accounts.google.com/o/oauth2/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"oh_ICw2LCEbZEl5W9S9zCSUN\"}}";
     private static final String APPLICATION_NAME = "Mystery Hunter Web App";
-    private static final String REDIRECT_URI = "http://localhost:8080";
+    private static final String REDIRECT_URI = "https://mysteryhunting.herokuapp.com";
     private static final List<String> SCOPES = Arrays.asList(DriveScopes.DRIVE, "email", "profile");
     private static GoogleAuthorizationCodeFlow flow = null;
     private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
