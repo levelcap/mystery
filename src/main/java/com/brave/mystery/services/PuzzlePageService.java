@@ -24,7 +24,7 @@ public class PuzzlePageService {
     @Autowired
     DriveService driveService;
 
-    @Scheduled(fixedDelay = 600000)
+    @Scheduled(fixedDelay = 60000)
     public void parsePuzzlePages() {
         if (null != basePage) {
             try {

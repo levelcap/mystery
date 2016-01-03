@@ -302,6 +302,7 @@ public class DriveService {
 
         SpreadsheetEntry spreadsheet = null;
         for (SpreadsheetEntry entry : spreadsheets) {
+            LOGGER.info("Spreadsheet Entry: " + entry.getId() + " key: " + entry.getKey());
             if (entry.getId().equals(MASTER_SHEET_ID)) {
                 spreadsheet = entry;
                 break;
@@ -331,26 +332,5 @@ public class DriveService {
 
         // Send the new row to the API for insertion.
         row = service.insert(listFeedUrl, row);
-    }
-
-    public void printFiles() {
-        try {
-            Drive service = buildService();
-            FileList files = service.files().list().execute();
-
-            for (File file : files.getFiles()) {
-                System.out.println("Title: " + file.getName());
-                System.out.println("Description: " + file.getDescription());
-                System.out.println("MIME type: " + file.getMimeType());
-            }
-        } catch (HttpResponseException e) {
-            if (e.getStatusCode() == 401) {
-                // Credentials have been revoked.
-                // TODO: Redirect the user to the authorization URL.
-                throw new UnsupportedOperationException();
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred: " + e);
-        }
     }
 }
