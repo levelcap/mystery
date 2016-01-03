@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title th:text="${title}"></title>
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css'/>
+    <link rel='stylesheet prefetch' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'/>
+    <link rel='stylesheet prefetch' href='/css/main.css'/>
+    <link href='https://fonts.googleapis.com/css?family=Covered+By+Your+Grace' rel='stylesheet' type='text/css'/>
+    <link href='https://fonts.googleapis.com/css?family=Metamorphous' rel='stylesheet' type='text/css'/>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.11/angular.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular-sanitize.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/textAngular/1.2.2/textAngular.min.js'></script>
+    <script type="text/javascript" src="/js/ng-imgur.min.js"></script>
+    <script src="/js/main.js"></script>
+    <script src='https://code.jquery.com/jquery-1.11.2.min.js'></script>
+    <script src='https://code.jquery.com/ui/1.11.2/jquery-ui.min.js'></script>
+    <link href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" rel="stylesheet" type="text/css"/>
+    <link rel="shortcut icon" href="/images/favicon.png"/>
+</head>
+
+<body>
+<div class="page">
+    <img id="leftTape" src="/images/tape-left.png"/>
+    <img id="rightTape" src="/images/tape-right.png"/>
+    <header th:replace="fragments/header :: header"></header>
+
+    <div id="editContainer" ng-app="chardbApp">
+        <section id="characterSection" ng-controller="CharacterController" th:unless="${character} == null">
+            <input type="hidden" name="objId" id="objId" th:value="${character.id}"/>
+
+            <div class="subsection" id="basicInfo">
+                <input ng-model="char.name" type="text" name="name" placeholder="Character Name" required="true"/>
+                <img src="{{char.url}}" class="drop"/>
+
+                <div class="infoline"><label>Group:</label><span><input ng-model="char.group" type="text" name="group"
+                                                                        placeholder="Group" required="true"/></span>
+                </div>
+                <div class="infoline"><label>Time:</label><span><select ng-model="char.timePeriod"
+                                                                        ng-options="timePeriod.id as timePeriod.name for timePeriod in timePeriods"></select></span>
+                </div>
+                <div class="infoline"><label>Genre:</label><span><select ng-model="char.genre"
+                                                                         ng-options="genre.id as genre.name for genre in genres"></select></span>
+                </div>
+            </div>
+
+            <div class="subsection" id="details">
+                <div id="textContainer" class="container app" style="background-color: transparent;">
+                    <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"
+                         ta-disabled='disabled'></div>
+                </div>
+                <div id="characterControls">
+                    <div class="charDbButton" ng-click='save()'>Save</div>
+                    <div class="charDbButton" ng-click='delete()'>Delete</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="locationSection" ng-controller="LocationController" th:unless="${location} == null">
+            <input type="hidden" name="objId" id="objId" th:value="${location.id}"/>
+
+            <div class="subsection" id="basicInfo">
+                <input ng-model="char.name" type="text" name="name" placeholder="Location Name" required="true"/>
+                <img src="{{char.url}}" class="drop"/>
+
+                <div class="infoline"><label>Group:</label><span><input ng-model="char.group" type="text" name="group"
+                                                                        placeholder="Group" required="true"/></span>
+                </div>
+                <div class="infoline"><label>Time:</label><span><select ng-model="char.timePeriod"
+                                                                        ng-options="timePeriod.id as timePeriod.name for timePeriod in timePeriods"></select></span>
+                </div>
+                <div class="infoline"><label>Genre:</label><span><select ng-model="char.genre"
+                                                                         ng-options="genre.id as genre.name for genre in genres"></select></span>
+                </div>
+            </div>
+
+            <div class="subsection" id="details">
+                <div id="textContainer" class="container app" style="background-color: transparent;">
+                    <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"
+                         ta-disabled='disabled'></div>
+                </div>
+                <div id="characterControls">
+                    <div class="charDbButton" ng-click='save()'>Save</div>
+                    <div class="charDbButton" ng-click='delete()'>Delete</div>
+                </div>
+            </div>
+        </section>
+
+        <section id="settingSection" ng-controller="SettingController" th:unless="${setting} == null">
+            <div id="settingNav">
+                <div ng-class="{active:isSet(1)}" ng-click="setTab(1)" id="settingDetails">Details</div>
+                <div ng-class="{active:isSet(2)}" ng-click="setTab(2)" id="settingMembers">Members</div>
+                <div ng-class="{active:isSet(3)}" ng-click="setTab(3)" id="settingLocations">Locations</div>
+            </div>
+            <input type="hidden" name="objId" id="objId" th:value="${setting.id}"/>
+
+            <div class="subsection" id="basicInfo">
+                <input ng-model="char.name" type="text" name="name" placeholder="Setting Name" required="true"/>
+                <img src="{{char.url}}" class="drop"/>
+
+                <div class="infoline"><label>Time:</label><span><select ng-model="char.timePeriod"
+                                                                        ng-options="timePeriod.id as timePeriod.name for timePeriod in timePeriods"></select></span>
+                </div>
+                <div class="infoline"><label>Genre:</label><span><select ng-model="char.genre"
+                                                                         ng-options="genre.id as genre.name for genre in genres"></select></span>
+                </div>
+            </div>
+
+            <div ng-show="isSet(1)" class="subsection" id="details">
+                <div id="textContainer" class="container app" style="background-color: transparent;">
+                    <div text-angular="text-angular" name="htmlcontent" ng-model="htmlcontent"
+                         ta-disabled='disabled'></div>
+                </div>
+                <div id="characterControls">
+                    <div class="charDbButton" ng-click='save()'>Save</div>
+                    <div class="charDbButton" ng-click='delete()'>Delete</div>
+                </div>
+            </div>
+            <div ng-show="isSet(2)" class="subsection" id="members">
+                <div class="container app">
+                    <div class="infoline"><label>Search Characters to Add: </label><span><input
+                            id="memberSearch"/></span></div>
+                    <ul class="linkedList">
+                        <li ng-repeat="member in char.members" class="settingMember">
+                            <a ng-href="/c/{{member.id}}">{{member.name}}</a> <span class="deleteSpan"
+                                                                                    ng-click="deleteMember(member.id)">(remove)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="characterControls">
+                    <div class="charDbButton" ng-click='save()'>Save</div>
+                    <div class="charDbButton" ng-click='delete()'>Delete</div>
+                </div>
+            </div>
+            <div ng-show="isSet(3)" class="subsection" id="locations">
+                <div class="container app">
+                    <div class="infoline"><label>Search Locations to Add: </label><span><input
+                            id="locationSearch"/></span>
+                    </div>
+                    <ul class="linkedList">
+                        <li ng-repeat="location in char.locations" class="settingLocation">
+                            <a ng-href="/l/{{location.id}}">{{location.name}}</a> <span class="deleteSpan"
+                                                                                        ng-click='deleteLocation(location.id)'>(remove)</span>
+                        </li>
+                    </ul>
+                </div>
+                <div id="characterControls">
+                    <div class="charDbButton" ng-click='save()'>Save</div>
+                    <div class="charDbButton" ng-click='delete()'>Delete</div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#memberSearch").autocomplete({
+            minLength: 1,
+            delay: 500,
+            //define callback to format results
+            source: function (request, response) {
+                $.getJSON("/search/character/name/" + request.term, function (result) {
+                    response($.map(result, function (item) {
+                        return {
+                            label: item.name + " by " + item.user.username,
+                            value: item.name,
+                            member: item,
+                        }
+                    }));
+                });
+            },
+
+            select: function (event, ui) {
+                if (ui.item) {
+                    event.preventDefault();
+                    var members = angular.element(document.querySelector('#settingSection')).scope().char.members;
+                    if (null == members) {
+                        members = [];
+                    }
+                    members.push(ui.item.member);
+                    angular.element(document.querySelector('#settingSection')).scope().char.members = members;
+                    angular.element(document.querySelector('#settingSection')).scope().$apply();
+                }
+            }
+        });
+        $("#locationSearch").autocomplete({
+            minLength: 1,
+            delay: 500,
+            //define callback to format results
+            source: function (request, response) {
+                $.getJSON("/search/location/name/" + request.term, function (result) {
+                    response($.map(result, function (item) {
+                        return {
+                            label: item.name + " by " + item.user.username,
+                            value: item.name,
+                            location: item
+                        }
+                    }));
+                });
+            },
+
+            select: function (event, ui) {
+                if (ui.item) {
+                    event.preventDefault();
+                    var locations = angular.element(document.querySelector('#settingSection')).scope().char.locations;
+                    if (null == locations) {
+                        locations = [];
+                    }
+                    locations.push(ui.item.location);
+                    angular.element(document.querySelector('#settingSection')).scope().char.locations = locations;
+                    angular.element(document.querySelector('#settingSection')).scope().$apply();
+                }
+            }
+        });
+    });
+</script>
+</body>
+</html>

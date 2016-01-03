@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<header th:fragment="header">
+    <ul>
+        <a href="/">
+            <li>Home</li>
+        </a>
+        <a href="/login" th:unless="${loggedIn}">
+            <li>Login</li>
+        </a>
+        <a href="/register" th:unless="${loggedIn}">
+            <li>Register</li>
+        </a>
+        <a href="/user" th:if="${loggedIn}">
+            <li>Profile</li>
+        </a>
+        <a href="/new" th:if="${loggedIn}">
+            <li>New Character</li>
+        </a>
+        <a href="/newLocation" th:if="${loggedIn}">
+            <li>New Location</li>
+        </a>
+        <a href="/newSetting" th:if="${loggedIn}">
+            <li>New Setting</li>
+        </a>
+        <a href="/logout" th:if="${loggedIn}">
+            <li>Logout</li>
+        </a>
+    </ul>
+</header>
+</body>
+</html>
