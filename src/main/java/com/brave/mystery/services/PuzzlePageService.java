@@ -35,6 +35,8 @@ public class PuzzlePageService {
             } catch (IOException e) {
                 LOGGER.error("Couldn't do the thing because of reasons: " + e.getMessage(), e);
             }
+        } else {
+            LOGGER.info("No base URL set yet");
         }
     }
 
@@ -67,9 +69,10 @@ public class PuzzlePageService {
     private void createSpreadsheet(String url) {
         try {
             Document puzzleDoc = Jsoup.connect(url).get();
-            driveService.createSpreadsheet(puzzleDoc.title(), puzzleDoc.title());
+            String sheet = driveService.createSpreadsheet(puzzleDoc.title(), puzzleDoc.title());
+            driveService.addRow(puzzleDoc.title(), url, sheet);
             puzzles.add(url);
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (Exception e) {
             LOGGER.error("Error creating a spreadsheet for: " + url + " " + e.getMessage(), e);
         }

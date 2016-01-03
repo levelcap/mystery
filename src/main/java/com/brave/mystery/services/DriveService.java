@@ -19,7 +19,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.google.gdata.client.spreadsheet.*;
+import com.google.gdata.data.spreadsheet.*;
+
 import java.io.IOException;
+import java.net.*;
+
 import java.io.StringReader;
 import java.util.Arrays;
 import java.util.List;
@@ -36,6 +41,7 @@ public class DriveService {
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final String SPREADSHEET_MIME = "application/vnd.google-apps.spreadsheet";
     private static final String PARENT_FOLDER = "0B7cbduDZ2uxwYTdsOWhDWF92ckk";
+    private static final String MASTER_SHEET_ID = "1ydcum7BW7-Z7Nvfy2c7Dt_961jh2JgmSfZlM-A-BSTY";
 
     private Credential savedCred = null;
 
@@ -265,7 +271,7 @@ public class DriveService {
                 .build();
     }
 
-    public void createSpreadsheet(String name, String description) throws IOException {
+    public String createSpreadsheet(String name, String description) throws IOException {
         Drive service = buildService();
         File body = new File();
         body.setName(name);
@@ -275,6 +281,56 @@ public class DriveService {
 
         File file = service.files().create(body).execute();
         LOGGER.info("Created " + file.getId() + " " + file.getName());
+        return file.getWebViewLink();
+    }
+
+    public void addRow(String title, String link, String sheet) throws Exception {
+        SpreadsheetService service = new SpreadsheetService(APPLICATION_NAME);
+        service.setOAuth2Credentials(savedCred);
+
+        // Define the URL to request.  This should never change.
+        URL SPREADSHEET_FEED_URL = new URL("https://spreadsheets.google.com/feeds/spreadsheets/private/full");
+
+        // Make a request to the API and get all spreadsheets.
+        SpreadsheetFeed feed = service.getFeed(SPREADSHEET_FEED_URL, SpreadsheetFeed.class);
+        List<SpreadsheetEntry> spreadsheets = feed.getEntries();
+
+        if (spreadsheets.size() == 0) {
+            LOGGER.error("No spreadsheets found, so that won't work");
+            return;
+        }
+
+        SpreadsheetEntry spreadsheet = null;
+        for (SpreadsheetEntry entry : spreadsheets) {
+            if (entry.getId().equals(MASTER_SHEET_ID)) {
+                spreadsheet = entry;
+                break;
+            }
+        }
+
+        if (spreadsheet == null) {
+            LOGGER.error("Could not find master spreadsheet, boo and/or hiss");
+            return;
+        }
+
+        WorksheetFeed worksheetFeed = service.getFeed(
+                spreadsheet.getWorksheetFeedUrl(), WorksheetFeed.class);
+        List<WorksheetEntry> worksheets = worksheetFeed.getEntries();
+        WorksheetEntry worksheet = worksheets.get(0);
+
+        // Fetch the list feed of the worksheet.
+        URL listFeedUrl = worksheet.getListFeedUrl();
+        ListFeed listFeed = service.getFeed(listFeedUrl, ListFeed.class);
+
+        // Create a local representation of the new row.
+        ListEntry row = new ListEntry();
+        row.getCustomElements().setValueLocal("puzzleTitle", title);
+        row.getCustomElements().setValueLocal("puzzleLink", link);
+        row.getCustomElements().setValueLocal("puzzleSheet", sheet);
+        row.getCustomElements().setValueLocal("solved", "");
+
+        // Send the new row to the API for insertion.
+        row = service.insert(listFeedUrl, row);
     }
 
     public void printFiles() {
