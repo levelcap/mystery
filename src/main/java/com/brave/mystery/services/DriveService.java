@@ -302,8 +302,8 @@ public class DriveService {
 
         SpreadsheetEntry spreadsheet = null;
         for (SpreadsheetEntry entry : spreadsheets) {
-            LOGGER.info("Spreadsheet Entry: " + entry.getId() + " key: " + entry.getKey());
-            if (entry.getId().equals(MASTER_SHEET_ID)) {
+            //LOGGER.info("Spreadsheet Entry: " + entry.getId() + " key: " + entry.getKey());
+            if (entry.getKey().equals(MASTER_SHEET_ID)) {
                 spreadsheet = entry;
                 break;
             }
