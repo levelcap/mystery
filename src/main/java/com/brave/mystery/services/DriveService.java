@@ -325,10 +325,10 @@ public class DriveService {
 
         // Create a local representation of the new row.
         ListEntry row = new ListEntry();
-        row.getCustomElements().setValueLocal("puzzleTitle", title);
-        row.getCustomElements().setValueLocal("puzzleLink", link);
-        row.getCustomElements().setValueLocal("puzzleSheet", sheet);
-        row.getCustomElements().setValueLocal("solved", "");
+        row.getCustomElements().setValueLocal("Puzzle Name", title);
+        row.getCustomElements().setValueLocal("Puzzle Link", link);
+        row.getCustomElements().setValueLocal("Puzzle Sheet", sheet);
+        row.getCustomElements().setValueLocal("Status", "");
 
         // Send the new row to the API for insertion.
         row = service.insert(listFeedUrl, row);
