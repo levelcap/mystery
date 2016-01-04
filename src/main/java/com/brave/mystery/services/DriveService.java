@@ -5,27 +5,23 @@ import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
 import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
 import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
 import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
-import com.google.api.client.http.HttpResponseException;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.drive.model.File;
-import com.google.api.services.drive.model.FileList;
 import com.google.api.services.oauth2.Oauth2;
 import com.google.api.services.oauth2.model.Userinfoplus;
+import com.google.gdata.client.spreadsheet.SpreadsheetService;
+import com.google.gdata.data.spreadsheet.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.google.gdata.client.spreadsheet.*;
-import com.google.gdata.data.spreadsheet.*;
-
 import java.io.IOException;
-import java.net.*;
-
 import java.io.StringReader;
+import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 
@@ -42,6 +38,7 @@ public class DriveService {
     private static final String SPREADSHEET_MIME = "application/vnd.google-apps.spreadsheet";
     private static final String PARENT_FOLDER = "0B7cbduDZ2uxwYTdsOWhDWF92ckk";
     private static final String MASTER_SHEET_ID = "1ydcum7BW7-Z7Nvfy2c7Dt_961jh2JgmSfZlM-A-BSTY";
+    private static final String SPREADSHEET_PRE = "https://docs.google.com/spreadsheets/d/";
 
     private Credential savedCred = null;
 
@@ -281,7 +278,7 @@ public class DriveService {
 
         File file = service.files().create(body).execute();
         LOGGER.info("Created " + file.getId() + " " + file.getName());
-        return file.getWebViewLink();
+        return SPREADSHEET_PRE + file.getId();
     }
 
     public void addRow(String title, String link, String sheet) throws Exception {
