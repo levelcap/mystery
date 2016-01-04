@@ -48,6 +48,9 @@ public class PuzzlePageService {
     private void parseLinks(Elements links) {
         for (Element link : links) {
             String url = link.attr("abs:href");
+            if (url.substring(url.length() - 1).equals("/")) {
+                url = url.substring(0, url.length() - 1);
+            }
             if (!puzzles.contains(url)) {
                 if (url.indexOf("puzzle/") != url.lastIndexOf("puzzle/")) {
                     createSpreadsheet(url);
