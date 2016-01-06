@@ -36,8 +36,8 @@ public class DriveService {
     private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final String SPREADSHEET_MIME = "application/vnd.google-apps.spreadsheet";
-    private static final String PARENT_FOLDER = "0B7cbduDZ2uxwYTdsOWhDWF92ckk";
-    private static final String MASTER_SHEET_ID = "1ydcum7BW7-Z7Nvfy2c7Dt_961jh2JgmSfZlM-A-BSTY";
+    private static final String PARENT_FOLDER = "0B72n07EhrFPsZUdWM0QzejB2eDg";
+    private static final String MASTER_SHEET_ID = "1KtA6dxo7hUTTyGarHj5W4n3EAGu2oj42vdEABr";
     private static final String SPREADSHEET_PRE = "https://docs.google.com/spreadsheets/d/";
 
     private Credential savedCred = null;
