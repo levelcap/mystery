@@ -1,6 +1,7 @@
 package com.brave.mystery.services;
 
 import org.jsoup.Jsoup;
+import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -20,6 +21,7 @@ public class PuzzlePageService {
     private String basePage = null;
     private String parsePage = null;
     private String prefix = "puzzle/";
+    private String titleCut = " — MIT Mystery Hunt 2015";
     private Set<String> parsedLinks = new HashSet<String>();
     private Set<String> puzzles = new HashSet<String>();
 
@@ -74,8 +76,13 @@ public class PuzzlePageService {
     private void createSpreadsheet(String url) {
         try {
             Document puzzleDoc = Jsoup.connect(url).get();
-            String sheet = driveService.createSpreadsheet(puzzleDoc.title(), puzzleDoc.title());
-            driveService.addRow(puzzleDoc.title(), url, sheet);
+            String title = puzzleDoc.title();
+            if (!StringUtil.isBlank(titleCut)) {
+                title = title.replace(titleCut, "");
+            }
+
+            String sheet = driveService.createSpreadsheet(title, puzzleDoc.title());
+            driveService.addRow(title, url, sheet);
             puzzles.add(url);
             Thread.sleep(1000);
         } catch (Exception e) {
@@ -105,5 +112,13 @@ public class PuzzlePageService {
 
     public String getPrefix() {
         return this.prefix;
+    }
+
+    public void setTitleCut(String titleCut) {
+        this.titleCut = titleCut;
+    }
+
+    public String getTitleCut() {
+        return this.titleCut;
     }
 }

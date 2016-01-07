@@ -60,4 +60,14 @@ public class DriveController {
             return false;
         }
     }
+
+    @RequestMapping("/api/setTitleCut")
+    public boolean setTitleCut(@RequestParam(value = "titleCut") String titleCut) {
+        try {
+            puzzlePageService.setTitleCut(titleCut);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

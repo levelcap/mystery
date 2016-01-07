@@ -38,4 +38,10 @@ $(function () {
             console.log("Set prefix performed.");
         });
     });
+
+    $("#setTitleCut").click(function() {
+        $.get("/api/setTitleCut?titleCut=" + $("#titleCut").val(), function (data) {
+            console.log("Set title cut string performed.");
+        });
+    });
 });
