@@ -18,6 +18,8 @@ import java.util.Set;
 public class PuzzlePageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PuzzlePageService.class);
     private String basePage = null;
+    private String parsePage = null;
+    private String prefix = "puzzle/";
     private Set<String> parsedLinks = new HashSet<String>();
     private Set<String> puzzles = new HashSet<String>();
 
@@ -26,7 +28,7 @@ public class PuzzlePageService {
 
     @Scheduled(fixedDelay = 60000)
     public void parsePuzzlePages() {
-        if (null != basePage) {
+        if (null != basePage && null != parsePage) {
             try {
                 LOGGER.info("Parsing base URL: {} ", basePage);
                 Elements links = getLinksFromPage(basePage);
@@ -36,7 +38,7 @@ public class PuzzlePageService {
                 LOGGER.error("Couldn't do the thing because of reasons: " + e.getMessage(), e);
             }
         } else {
-            LOGGER.info("No base URL set yet");
+            LOGGER.info("No base URL or parse URL set yet");
         }
     }
 
@@ -52,7 +54,7 @@ public class PuzzlePageService {
                 url = url.substring(0, url.length() - 1);
             }
             if (!puzzles.contains(url)) {
-                if (url.indexOf("puzzle/") != url.lastIndexOf("puzzle/")) {
+                if (url.indexOf(prefix) > 0) {
                     createSpreadsheet(url);
                 } else if (url.contains(basePage)) {
                     try {
@@ -83,5 +85,8 @@ public class PuzzlePageService {
 
     public void setBasePage(String basePage) {
         this.basePage = basePage;
+    }
+    public void setParsePage(String parsePage) {
+        this.parsePage = parsePage;
     }
 }

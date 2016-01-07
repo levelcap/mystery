@@ -24,18 +24,37 @@ public class DriveController {
     @RequestMapping("/api/auth")
     public boolean authorizeToken(@RequestParam(value = "code") String code) {
         try {
-            Credential credential = driveService.getCredentials(code, null);
+            driveService.getCredentials(code, null);
             return true;
         } catch (Exception e) {
             return false;
         }
     }
 
-
     @RequestMapping("/api/setUrl")
     public boolean setUrl(@RequestParam(value = "url") String url) {
         try {
             puzzlePageService.setBasePage(url);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping("/api/setParsePage")
+    public boolean setParsePage(@RequestParam(value = "url") String url) {
+        try {
+            puzzlePageService.setParsePage(url);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping("/api/setPrefix")
+    public boolean setPrefix(@RequestParam(value = "prefix") String prefix) {
+        try {
+            puzzlePageService.setParsePage(prefix);
             return true;
         } catch (Exception e) {
             return false;

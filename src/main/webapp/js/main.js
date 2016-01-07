@@ -26,4 +26,16 @@ $(function () {
             console.log("Set url performed.");
         });
     });
+
+    $("#setParsePage").click(function() {
+        $.get("/api/setParsePage?url=" + $("#parsePage").val(), function (data) {
+            console.log("Set parse page performed.");
+        });
+    });
+
+    $("#setPrefix").click(function() {
+        $.get("/api/setPrefix?prefix=" + $("#prefix").val(), function (data) {
+            console.log("Set prefix performed.");
+        });
+    });
 });

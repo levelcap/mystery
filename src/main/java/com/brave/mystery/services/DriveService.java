@@ -1,10 +1,7 @@
 package com.brave.mystery.services;
 
 import com.google.api.client.auth.oauth2.Credential;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeFlow;
-import com.google.api.client.googleapis.auth.oauth2.GoogleAuthorizationCodeRequestUrl;
-import com.google.api.client.googleapis.auth.oauth2.GoogleClientSecrets;
-import com.google.api.client.googleapis.auth.oauth2.GoogleTokenResponse;
+import com.google.api.client.googleapis.auth.oauth2.*;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.client.json.jackson2.JacksonFactory;
@@ -28,6 +25,9 @@ import java.util.List;
 @Service
 public class DriveService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DriveService.class);
+    private static final String CLIENT_ID = "456405405866-2ru5bltgivtr2hntllk4bbalruss73pv.apps.googleusercontent.com";
+    private static final String CLIENT_SECRET = "oh_ICw2LCEbZEl5W9S9zCSUN";
+
     private static final String JSON = "{\"web\":{\"client_id\":\"456405405866-2ru5bltgivtr2hntllk4bbalruss73pv.apps.googleusercontent.com\",\"project_id\":\"inlaid-plasma-117917\",\"auth_uri\":\"https://accounts.google.com/o/oauth2/auth\",\"token_uri\":\"https://accounts.google.com/o/oauth2/token\",\"auth_provider_x509_cert_url\":\"https://www.googleapis.com/oauth2/v1/certs\",\"client_secret\":\"oh_ICw2LCEbZEl5W9S9zCSUN\"}}";
     private static final String APPLICATION_NAME = "Mystery Hunter Web App";
     private static final String REDIRECT_URI = "https://mysteryhunting.herokuapp.com";
@@ -36,10 +36,12 @@ public class DriveService {
     private static final JacksonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
     private static final HttpTransport HTTP_TRANSPORT = new NetHttpTransport();
     private static final String SPREADSHEET_MIME = "application/vnd.google-apps.spreadsheet";
-    private static final String PARENT_FOLDER = "0B72n07EhrFPsZUdWM0QzejB2eDg";
-    private static final String MASTER_SHEET_ID = "1KtA6dxo7hUTTyGarHj5W4n3EAGu2oj42vdEABr-G-AQ";
+    private String PARENT_FOLDER = "0B72n07EhrFPsZUdWM0QzejB2eDg";
+    private String MASTER_SHEET_ID = "1KtA6dxo7hUTTyGarHj5W4n3EAGu2oj42vdEABr-G-AQ";
     private static final String SPREADSHEET_PRE = "https://docs.google.com/spreadsheets/d/";
 
+    private String refreshToken = null;
+    private String accessToken = null;
     private Credential savedCred = null;
 
     /**
@@ -114,6 +116,10 @@ public class DriveService {
      */
     protected Credential getStoredCredentials(String userId) {
         // Credential instance with stored accessToken and refreshToken.
+        Credential credentials = new GoogleCredential.Builder()
+                .setClientSecrets(CLIENT_ID, CLIENT_SECRET)
+                .setJsonFactory(JSON_FACTORY).setTransport(HTTP_TRANSPORT).build()
+                .setRefreshToken(refreshToken).setAccessToken(accessToken);
         return savedCred;
     }
 
@@ -124,6 +130,9 @@ public class DriveService {
      * @param credentials The OAuth 2.0 credentials to store.
      */
     protected void storeCredentials(String userId, Credential credentials) {
+        this.accessToken = credentials.getAccessToken();
+        this.refreshToken = credentials.getRefreshToken();
+        LOGGER.info("Storing credentials with accessToken = " + this.accessToken + " and refresh token = " + this.refreshToken);
         savedCred = credentials;
     }
 
@@ -329,5 +338,13 @@ public class DriveService {
 
         // Send the new row to the API for insertion.
         row = service.insert(listFeedUrl, row);
+    }
+
+    public void setParentFolder(String id) {
+        this.PARENT_FOLDER = id;
+    }
+
+    public void setMasterSheetId(String id) {
+        this.MASTER_SHEET_ID = id;
     }
 }
