@@ -30,8 +30,8 @@ public class PuzzlePageService {
     public void parsePuzzlePages() {
         if (null != basePage && null != parsePage) {
             try {
-                LOGGER.info("Parsing base URL: {} ", basePage);
-                Elements links = getLinksFromPage(basePage);
+                LOGGER.info("Parsing parse page URL: {} ", parsePage);
+                Elements links = getLinksFromPage(parsePage);
                 parseLinks(links);
                 LOGGER.info("ALL DONE!  Here's the list of puzzle links: " + puzzles.toString());
             } catch (IOException e) {
@@ -86,7 +86,24 @@ public class PuzzlePageService {
     public void setBasePage(String basePage) {
         this.basePage = basePage;
     }
+
+    public String getBasePage() {
+        return this.basePage;
+    }
+
     public void setParsePage(String parsePage) {
         this.parsePage = parsePage;
+    }
+
+    public String getParsePage() {
+        return this.parsePage;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public String getPrefix() {
+        return this.prefix;
     }
 }

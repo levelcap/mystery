@@ -54,7 +54,7 @@ public class DriveController {
     @RequestMapping("/api/setPrefix")
     public boolean setPrefix(@RequestParam(value = "prefix") String prefix) {
         try {
-            puzzlePageService.setParsePage(prefix);
+            puzzlePageService.setPrefix(prefix);
             return true;
         } catch (Exception e) {
             return false;

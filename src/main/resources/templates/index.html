@@ -6,13 +6,13 @@
 <body>
 <a th:href="${authUrl}">Authorize the Url</a>
 <br/><br/>
-Domain: <input id="basePage" type="text" value="http://web.mit.edu/puzzle/www/2015/"/>
+Domain: <input id="basePage" type="text" th:value="${basePage}"/>
 <input type="button" id="setUrl" value="Set Base URL"/>
 <br/><br/>
-Parse Page: <input id="parsePage" type="text" value=""/>
+Parse Page: <input id="parsePage" type="text" th:value="${parsePage}"/>
 <input type="button" id="setParsePage" value="Set Parse Page"/>
 <br/><br/>
-Prefix: <input id="prefix" type="text" value=""/>
+Prefix: <input id="prefix" type="text" th:value="${prefix}"/>
 <input type="button" id="setPrefix" value="Set Prefix"/>
 
 <script src="/js/main.js"></script>
