@@ -214,7 +214,7 @@ public class DriveService {
         GoogleAuthorizationCodeRequestUrl urlBuilder = getFlow()
                 .newAuthorizationUrl()
                 .setRedirectUri(REDIRECT_URI)
-                .setState(state);
+                .setState(state).setAccessType("offline");
         urlBuilder.set("user_id", emailAddress);
         return urlBuilder.build();
     }
