@@ -40,10 +40,9 @@ public class DriveService {
     private String MASTER_SHEET_ID = "1KtA6dxo7hUTTyGarHj5W4n3EAGu2oj42vdEABr-G-AQ";
     private static final String SPREADSHEET_PRE = "https://docs.google.com/spreadsheets/d/";
 
-    //Storing credentials with accessToken = ya29.YgKwR9HkpXVtXCbqPOHgpTIrj7KHg-2y33O0OHPusCPgFR82asAWR5XTR6mntmqdnc5v and refresh token = 1/itQIrOsB61HaoBzSGHYl5jaS3mYltm6n94QTCCh_i_5IgOrJDtdun6zK6XiATCKT
-    private String refreshToken = null;
-    private String accessToken = null;
-    private Credential savedCred = null;
+    //Using mystery hunt access by default so we do not have to reload them every time
+    private String refreshToken = "1/1e1yWNZRq-6qOkIku9VSYpDkKaw9o1m_onObrOdNm81IgOrJDtdun6zK6XiATCKT";
+    private String accessToken = "ya29.YgKUpgxOTl-G5SblR22Mg6DMrtLQ246DeCj3XxJKaIxsqTNmDo22shGf9r8md-l0cOnG";
 
     /**
      * Exception thrown when an error occurred while retrieving credentials.
@@ -112,16 +111,15 @@ public class DriveService {
     /**
      * Retrieved stored credentials for the provided user ID.
      *
-     * @param userId User's ID.
      * @return Stored Credential if found, {@code null} otherwise.
      */
-    protected Credential getStoredCredentials(String userId) {
+    protected Credential getStoredCredentials() {
         // Credential instance with stored accessToken and refreshToken.
         Credential credentials = new GoogleCredential.Builder()
                 .setClientSecrets(CLIENT_ID, CLIENT_SECRET)
                 .setJsonFactory(JSON_FACTORY).setTransport(HTTP_TRANSPORT).build()
                 .setRefreshToken(refreshToken).setAccessToken(accessToken);
-        return savedCred;
+        return credentials;
     }
 
     /**
@@ -134,7 +132,6 @@ public class DriveService {
         this.accessToken = credentials.getAccessToken();
         this.refreshToken = credentials.getRefreshToken();
         LOGGER.info("Storing credentials with accessToken = " + this.accessToken + " and refresh token = " + this.refreshToken);
-        savedCred = credentials;
     }
 
     /**
@@ -252,7 +249,7 @@ public class DriveService {
                 storeCredentials(userId, credentials);
                 return credentials;
             } else {
-                credentials = getStoredCredentials(userId);
+                credentials = getStoredCredentials();
                 if (credentials != null && credentials.getRefreshToken() != null) {
                     return credentials;
                 }
@@ -273,7 +270,7 @@ public class DriveService {
     }
 
     public Drive buildService() {
-        return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, savedCred)
+        return new Drive.Builder(HTTP_TRANSPORT, JSON_FACTORY, getStoredCredentials())
                 .setApplicationName(APPLICATION_NAME)
                 .build();
     }
@@ -293,7 +290,7 @@ public class DriveService {
 
     public void addRow(String title, String link, String sheet) throws Exception {
         SpreadsheetService service = new SpreadsheetService(APPLICATION_NAME);
-        service.setOAuth2Credentials(savedCred);
+        service.setOAuth2Credentials(getStoredCredentials());
 
         // Define the URL to request.  This should never change.
         URL SPREADSHEET_FEED_URL = new URL("https://spreadsheets.google.com/feeds/spreadsheets/private/full");
