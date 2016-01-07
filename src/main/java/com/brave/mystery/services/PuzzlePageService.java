@@ -1,5 +1,6 @@
 package com.brave.mystery.services;
 
+import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -25,6 +26,11 @@ public class PuzzlePageService {
     private Set<String> parsedLinks = new HashSet<String>();
     private Set<String> puzzles = new HashSet<String>();
 
+    private String username = "notaplanet";
+    private String password = "otulp";
+    private String login = username + ":" + password;
+    private String base64login = new String(Base64.encodeBase64(login.getBytes()));
+
     @Autowired
     DriveService driveService;
 
@@ -45,7 +51,9 @@ public class PuzzlePageService {
     }
 
     private Elements getLinksFromPage(String url) throws IOException {
-        Document doc = Jsoup.connect(url).get();
+        Document doc = Jsoup.connect(url)
+                .header("Authorization", "Basic " + base64login)
+                .get();
         return doc.select("a[href]");
     }
 
