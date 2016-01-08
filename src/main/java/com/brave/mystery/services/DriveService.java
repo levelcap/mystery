@@ -330,9 +330,12 @@ public class DriveService {
         // Create a local representation of the new row.
         ListEntry row = new ListEntry();
         row.getCustomElements().setValueLocal("puzzleName", title);
+        row.getCustomElements().setValueLocal("answer", "");
         row.getCustomElements().setValueLocal("puzzleLink", link);
         row.getCustomElements().setValueLocal("puzzleSheet", sheet);
         row.getCustomElements().setValueLocal("status", "Open");
+        row.getCustomElements().setValueLocal("slackChannel", "");
+        row.getCustomElements().setValueLocal("notes", "Open");
 
         // Send the new row to the API for insertion.
         row = service.insert(listFeedUrl, row);
