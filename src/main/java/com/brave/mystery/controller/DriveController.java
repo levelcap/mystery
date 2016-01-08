@@ -70,4 +70,24 @@ public class DriveController {
             return false;
         }
     }
+
+    @RequestMapping("/api/setCookieName")
+    public boolean setCookieName(@RequestParam(value = "cookieName") String cookieName) {
+        try {
+            puzzlePageService.setCookieName(cookieName);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    @RequestMapping("/api/setCookieValue")
+    public boolean setCookieValue(@RequestParam(value = "cookieValue") String cookieValue) {
+        try {
+            puzzlePageService.setCookieValue(cookieValue);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }

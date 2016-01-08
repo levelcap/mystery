@@ -26,6 +26,8 @@ public class PageController {
             model.addAttribute("parsePage", puzzlePageService.getParsePage());
             model.addAttribute("prefix", puzzlePageService.getPrefix());
             model.addAttribute("titleCut", puzzlePageService.getTitleCut());
+            model.addAttribute("cookieName", puzzlePageService.getCookieName());
+            model.addAttribute("cookieValue", puzzlePageService.getCookieValue());
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

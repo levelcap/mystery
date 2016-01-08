@@ -29,7 +29,8 @@ public class PuzzlePageService {
     private String username = "notaplanet";
     private String password = "otulp";
     private String login = username + ":" + password;
-    private String base64login = new String(Base64.encodeBase64(login.getBytes()));
+    private String cookieName = "";
+    private String cookieValue = "";
 
     @Autowired
     DriveService driveService;
@@ -52,7 +53,7 @@ public class PuzzlePageService {
 
     private Elements getLinksFromPage(String url) throws IOException {
         Document doc = Jsoup.connect(url)
-                .header("Authorization", "Basic " + base64login)
+                .cookie(cookieName, cookieValue)
                 .get();
         return doc.select("a[href]");
     }
@@ -128,5 +129,21 @@ public class PuzzlePageService {
 
     public String getTitleCut() {
         return this.titleCut;
+    }
+
+    public String getCookieName() {
+        return cookieName;
+    }
+
+    public void setCookieName(String cookieName) {
+        this.cookieName = cookieName;
+    }
+
+    public String getCookieValue() {
+        return cookieValue;
+    }
+
+    public void setCookieValue(String cookieValue) {
+        this.cookieValue = cookieValue;
     }
 }

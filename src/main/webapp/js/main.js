@@ -44,4 +44,16 @@ $(function () {
             console.log("Set title cut string performed.");
         });
     });
+
+    $("#setCookieName").click(function() {
+        $.get("/api/setCookieName?cookieName=" + $("#cookieName").val(), function (data) {
+            console.log("Set cookieName string performed.");
+        });
+    });
+
+    $("#setCookieValue").click(function() {
+        $.get("/api/setCookieValue?cookieValue=" + $("#cookieValue").val(), function (data) {
+            console.log("Set cookieValue string performed.");
+        });
+    });
 });
