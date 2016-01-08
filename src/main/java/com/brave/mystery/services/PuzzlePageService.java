@@ -1,6 +1,7 @@
 package com.brave.mystery.services;
 
 import org.apache.commons.codec.binary.Base64;
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
 import org.jsoup.nodes.Document;
@@ -19,6 +20,7 @@ import java.util.Set;
 @Service
 public class PuzzlePageService {
     private static final Logger LOGGER = LoggerFactory.getLogger(PuzzlePageService.class);
+    private String loginPage = "http://20000puzzles.com/register";
     private String basePage = null;
     private String parsePage = null;
     private String prefix = "puzzle/";
@@ -28,7 +30,6 @@ public class PuzzlePageService {
 
     private String username = "notaplanet";
     private String password = "otulp";
-    private String login = username + ":" + password;
     private String cookieName = "";
     private String cookieValue = "";
 
@@ -52,9 +53,7 @@ public class PuzzlePageService {
     }
 
     private Elements getLinksFromPage(String url) throws IOException {
-        Document doc = Jsoup.connect(url)
-                .cookie(cookieName, cookieValue)
-                .get();
+        Document doc = loginAndGetURL(url);
         return doc.select("a[href]");
     }
 
@@ -84,7 +83,7 @@ public class PuzzlePageService {
 
     private void createSpreadsheet(String url) {
         try {
-            Document puzzleDoc = Jsoup.connect(url).cookie(cookieName, cookieValue).get();
+            Document puzzleDoc = loginAndGetURL(url);
             String title = puzzleDoc.title();
             if (!StringUtil.isBlank(titleCut)) {
                 title = title.replace(titleCut, "");
@@ -97,6 +96,15 @@ public class PuzzlePageService {
         } catch (Exception e) {
             LOGGER.error("Error creating a spreadsheet for: " + url + " " + e.getMessage(), e);
         }
+    }
+
+    private Document loginAndGetURL(String url) throws IOException {
+        Connection.Response res = Jsoup.connect(loginPage)
+                .data("username", username, "password", password, "type", "login", "csrfmiddlewaretoken", "31UHZ3ht5LDUQX8pTDDVhoUEu5Nvci7I")
+                .method(Connection.Method.POST)
+                .execute();
+
+        return Jsoup.connect(url).cookies(res.cookies()).get();
     }
 
     public void setBasePage(String basePage) {
