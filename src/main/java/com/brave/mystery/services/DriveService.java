@@ -329,7 +329,7 @@ public class DriveService {
 
         // Create a local representation of the new row.
         ListEntry row = new ListEntry();
-        listFeed.get
+
         row.getCustomElements().setValueLocal("puzzleName", title);
         row.getCustomElements().setValueLocal("answer", "");
         row.getCustomElements().setValueLocal("puzzleLink", link);
