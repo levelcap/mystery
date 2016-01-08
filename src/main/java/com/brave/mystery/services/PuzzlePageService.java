@@ -84,7 +84,7 @@ public class PuzzlePageService {
 
     private void createSpreadsheet(String url) {
         try {
-            Document puzzleDoc = Jsoup.connect(url).get();
+            Document puzzleDoc = Jsoup.connect(url).cookie(cookieName, cookieValue).get();
             String title = puzzleDoc.title();
             if (!StringUtil.isBlank(titleCut)) {
                 title = title.replace(titleCut, "");
