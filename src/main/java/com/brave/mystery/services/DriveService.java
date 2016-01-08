@@ -321,7 +321,7 @@ public class DriveService {
         WorksheetFeed worksheetFeed = service.getFeed(
                 spreadsheet.getWorksheetFeedUrl(), WorksheetFeed.class);
         List<WorksheetEntry> worksheets = worksheetFeed.getEntries();
-        WorksheetEntry worksheet = worksheets.get(0);
+        WorksheetEntry worksheet = worksheets.get(1);
 
         // Fetch the list feed of the worksheet.
         URL listFeedUrl = worksheet.getListFeedUrl();
@@ -329,13 +329,15 @@ public class DriveService {
 
         // Create a local representation of the new row.
         ListEntry row = new ListEntry();
+        listFeed.get
         row.getCustomElements().setValueLocal("puzzleName", title);
         row.getCustomElements().setValueLocal("answer", "");
         row.getCustomElements().setValueLocal("puzzleLink", link);
         row.getCustomElements().setValueLocal("puzzleSheet", sheet);
         row.getCustomElements().setValueLocal("status", "Open");
         row.getCustomElements().setValueLocal("slackChannel", "");
-        row.getCustomElements().setValueLocal("notes", "Open");
+        row.getCustomElements().setValueLocal("updates", "");
+        row.getCustomElements().setValueLocal("notes", "");
 
         // Send the new row to the API for insertion.
         row = service.insert(listFeedUrl, row);
