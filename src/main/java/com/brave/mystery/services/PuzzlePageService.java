@@ -104,23 +104,23 @@ public class PuzzlePageService {
                 .data("username", username, "password", password, "type", "login", "csrfmiddlewaretoken", "31UHZ3ht5LDUQX8pTDDVhoUEu5Nvci7I")
                 .method(Connection.Method.POST);
 
-        LOGGER.info("Connection info: " + conn.)
         Connection.Response res =         conn.execute();
 
         return Jsoup.connect(url).cookies(res.cookies()).get();
     }
 
     public void generateSheets() {
+        String title = "Puzzle #";
         try {
             for (int i = 1; i <= 200; i++) {
-                String title = "Puzzle #" + i;
+                title = "Puzzle #" + i;
 
                 String sheet = driveService.createSpreadsheet(title, title);
                 driveService.addRow(title, "", sheet);
                 Thread.sleep(1000);
             }
         } catch (Exception e) {
-            LOGGER.error("Error creating a spreadsheet for: " + url + " " + e.getMessage(), e);
+            LOGGER.error("Error creating a spreadsheet for: " + title + " " + e.getMessage(), e);
         }
     }
 
