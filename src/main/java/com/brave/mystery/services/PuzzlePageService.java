@@ -99,12 +99,29 @@ public class PuzzlePageService {
     }
 
     private Document loginAndGetURL(String url) throws IOException {
-        Connection.Response res = Jsoup.connect(loginPage)
+        LOGGER.info("Attempting to login to  " + loginPage);
+        Connection conn = Jsoup.connect(loginPage)
                 .data("username", username, "password", password, "type", "login", "csrfmiddlewaretoken", "31UHZ3ht5LDUQX8pTDDVhoUEu5Nvci7I")
-                .method(Connection.Method.POST)
-                .execute();
+                .method(Connection.Method.POST);
+
+        LOGGER.info("Connection info: " + conn.)
+        Connection.Response res =         conn.execute();
 
         return Jsoup.connect(url).cookies(res.cookies()).get();
+    }
+
+    public void generateSheets() {
+        try {
+            for (int i = 1; i <= 200; i++) {
+                String title = "Puzzle #" + i;
+
+                String sheet = driveService.createSpreadsheet(title, title);
+                driveService.addRow(title, "", sheet);
+                Thread.sleep(1000);
+            }
+        } catch (Exception e) {
+            LOGGER.error("Error creating a spreadsheet for: " + url + " " + e.getMessage(), e);
+        }
     }
 
     public void setBasePage(String basePage) {

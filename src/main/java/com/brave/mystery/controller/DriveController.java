@@ -90,4 +90,14 @@ public class DriveController {
             return false;
         }
     }
+
+    @RequestMapping("/api/generate")
+    public boolean generateSpreadsheets() {
+        try {
+            puzzlePageService.generateSheets();
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 }
