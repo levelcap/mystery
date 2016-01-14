@@ -109,10 +109,10 @@ public class PuzzlePageService {
         return Jsoup.connect(url).cookies(res.cookies()).get();
     }
 
-    public void generateSheets() {
+    public void generateSheets(Integer start, Integer end) {
         String title = "Puzzle #";
         try {
-            for (int i = 1; i <= 200; i++) {
+            for (int i = start; i <= end; i++) {
                 title = "Puzzle #" + i;
 
                 String sheet = driveService.createSpreadsheet(title, title);

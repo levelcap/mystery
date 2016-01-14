@@ -92,12 +92,29 @@ public class DriveController {
     }
 
     @RequestMapping("/api/generate")
-    public boolean generateSpreadsheets() {
+    public boolean generateSpreadsheets(@RequestParam(value = "start") Integer start,
+                                        @RequestParam(value = "end") Integer end) {
         try {
-            puzzlePageService.generateSheets();
+            GenerationRunner runner = new GenerationRunner(start, end);
+            Thread t = new Thread(runner);
+            t.start();
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    class GenerationRunner implements Runnable {
+        Integer start;
+        Integer end;
+
+        public GenerationRunner(Integer start, Integer end) {
+            this.start = start;
+            this.end = end;
+        }
+
+        public void run() {
+            puzzlePageService.generateSheets(start, end);
         }
     }
 }
