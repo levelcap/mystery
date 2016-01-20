@@ -18,6 +18,34 @@ Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
 <br/><br/>
 <input type="button" id="fateIt" value="FATE It Up"/>
 
+<div id="results">
+    <div id="failures">
+        <b>Failures: </b> <span id="failSpan"></span>
+    </div>
+    <div id="ties">
+        <b>Failures: </b> <span id="tieSpan"></span>
+    </div>
+    <div id="success">
+        <b>Successes: </b> <span id="successSpan"></span>
+    </div>
+    <div id="withstyle">
+        <b>Successes With Style: </b> <span id="withstyleSpan"></span>
+    </div>
+
+    <table id="resultTable">
+        <thead>
+            <tr>
+                <th>Run #</th>
+                <th>Outcome</th>
+                <th>Difficulty</th>
+                <th>Primary Roll</th>
+                <th>Successful Helpers</th>
+                <th>Failed Helpers</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
 <script src="/js/main.js"></script>
 </body>
 </html>

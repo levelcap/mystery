@@ -152,11 +152,11 @@ public class DriveController {
 
         Integer averageAdvantages = totalAdvantages / run;
 
-        analysis.put("Failures", totalFailures);
-        analysis.put("Ties", totalTies);
-        analysis.put("Successes", totalSuccesses);
-        analysis.put("With Style", totalSuccessesWithStyle);
-        analysis.put("Average Advantages", averageAdvantages);
+        analysis.put("fails", totalFailures);
+        analysis.put("ties", totalTies);
+        analysis.put("successes", totalSuccesses);
+        analysis.put("withStyles", totalSuccessesWithStyle);
+        analysis.put("avgAdvantage", averageAdvantages);
         analysis.put("results", results);
         return analysis;
     }
