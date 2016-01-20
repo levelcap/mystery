@@ -21,11 +21,13 @@ $(function () {
             $("#tieSpan").text(data.ties);
             $("#successSpan").text(data.successes);
             $("#withstyleSpan").text(data.withStyles);
+            $("#average").text(data.avgAdvantage);
 
-            var i = 0;
-            for (var result in data.results) {
-                i++;
-                $("resultTable").append('<tr><td>' + i + '</td><td>' + result.outcome + '</td><td>' + result.difficuly + '</td><td>' + result.primaryRoll + '</td><td>' + result.successfulHelpers + '</td><td>' + result.failedHelpers + '</td></tr>');
+            var i = 0;;
+            $("#resultTableBody").html("");
+            for (i = 0; i < data.results.length; i++) {
+                var result = data.results[i];
+                $("#resultTableBody").append('<tr><td>' + i + '</td><td>' + result.outcome + '</td><td>' + result.difficulty  + '</td><td>' + result.primaryRoll + '</td><td>' + result.successfulHelpers + '</td><td>' + result.failedHelpers + '</td></tr>');
             }
         });
     });

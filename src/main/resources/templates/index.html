@@ -2,6 +2,7 @@
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 <h2>FAE Obstacle Tester</h2>
@@ -31,6 +32,9 @@ Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
     <div id="withstyle">
         <b>Successes With Style: </b> <span id="withstyleSpan"></span>
     </div>
+    <div id="withstyle">
+        <b>Average Advantages Created: </b> <span id="average"></span>
+    </div>
 
     <table id="resultTable">
         <thead>
@@ -43,6 +47,9 @@ Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
                 <th>Failed Helpers</th>
             </tr>
         </thead>
+        <tbody id="resultTableBody">
+
+        </tbody>
     </table>
 </div>
 
