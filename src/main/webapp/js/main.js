@@ -14,46 +14,9 @@ var getUrlParameter = function getUrlParameter(sParam) {
 };
 
 $(function () {
-    var code = getUrlParameter("code");
-    if (typeof code != 'undefined') {
-        $.get("/api/auth?code=" + code, function (data) {
-            console.log("Authorized Google API");
-        });
-    }
-
-    $("#setUrl").click(function() {
-        $.get("/api/setUrl?url=" + $("#basePage").val(), function (data) {
-            console.log("Set url performed.");
-        });
-    });
-
-    $("#setParsePage").click(function() {
-        $.get("/api/setParsePage?url=" + $("#parsePage").val(), function (data) {
-            console.log("Set parse page performed.");
-        });
-    });
-
-    $("#setPrefix").click(function() {
-        $.get("/api/setPrefix?prefix=" + $("#prefix").val(), function (data) {
-            console.log("Set prefix performed.");
-        });
-    });
-
-    $("#setTitleCut").click(function() {
-        $.get("/api/setTitleCut?titleCut=" + $("#titleCut").val(), function (data) {
-            console.log("Set title cut string performed.");
-        });
-    });
-
-    $("#setCookieName").click(function() {
-        $.get("/api/setCookieName?cookieName=" + $("#cookieName").val(), function (data) {
-            console.log("Set cookieName string performed.");
-        });
-    });
-
-    $("#setCookieValue").click(function() {
-        $.get("/api/setCookieValue?cookieValue=" + $("#cookieValue").val(), function (data) {
-            console.log("Set cookieValue string performed.");
+    $("#fateIt").click(function() {
+        $.get("/api/fate?difficulty=" + $("#difficulty").val() + "&bonus=" + $("#bonus").val() + "&advantageDifficulty=" + $("#advantageDifficulty").val() + "&helpers=" + $("#helpers").val() + "&run=" + $("#run").val(), function (data) {
+            console.log(data);
         });
     });
 });

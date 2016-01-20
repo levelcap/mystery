@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+<a th:href="${authUrl}">Authorize the Url</a>
+<br/><br/>
+Domain: <input id="basePage" type="text" th:value="${basePage}"/>
+<input type="button" id="setUrl" value="Set Base URL"/>
+<br/><br/>
+Parse Page: <input id="parsePage" type="text" th:value="${parsePage}"/>
+<input type="button" id="setParsePage" value="Set Parse Page"/>
+<br/><br/>
+Prefix: <input id="prefix" type="text" th:value="${prefix}"/>
+<input type="button" id="setPrefix" value="Set Prefix"/>
+<br/><br/>
+Title Cut String: <input id="titleCut" type="text" th:value="${titleCut}"/>
+<input type="button" id="setTitleCut" value="Set Title Cut"/>
+<br/><br/>
+Login Cookie Name: <input id="cookieName" type="text" th:value="${cookieName}"/>
+<input type="button" id="setCookieName" value="Set Cookie Name"/>
+<br/><br/>
+Login Cookie Value: <input id="cookieValue" type="text" th:value="${cookieValue}"/>
+<input type="button" id="setCookieValue" value="Set Cookie Value"/>
+
+<script src="/js/main.js"></script>
+</body>
+</html>

@@ -150,7 +150,7 @@ public class DriveController {
             results.add(result);
         }
 
-        Double averageAdvantages = (double) (totalAdvantages / run);
+        Integer averageAdvantages = totalAdvantages / run;
 
         analysis.put("Failures", totalFailures);
         analysis.put("Ties", totalTies);

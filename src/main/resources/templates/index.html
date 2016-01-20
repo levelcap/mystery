@@ -4,25 +4,19 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 </head>
 <body>
-<a th:href="${authUrl}">Authorize the Url</a>
+<h2>FAE Obstacle Tester</h2>
+
+Obstacle Difficulty: <input id="difficulty" type="text" />
 <br/><br/>
-Domain: <input id="basePage" type="text" th:value="${basePage}"/>
-<input type="button" id="setUrl" value="Set Base URL"/>
+Highest Approach Bonus: <input id="bonus" type="text" value="3" />
 <br/><br/>
-Parse Page: <input id="parsePage" type="text" th:value="${parsePage}"/>
-<input type="button" id="setParsePage" value="Set Parse Page"/>
+Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
 <br/><br/>
-Prefix: <input id="prefix" type="text" th:value="${prefix}"/>
-<input type="button" id="setPrefix" value="Set Prefix"/>
+# of Advantage Attempers: <input id="helpers" type="text" value="2" />
 <br/><br/>
-Title Cut String: <input id="titleCut" type="text" th:value="${titleCut}"/>
-<input type="button" id="setTitleCut" value="Set Title Cut"/>
+# of Times to Test this Obstacle: <input id="run" type="text" />
 <br/><br/>
-Login Cookie Name: <input id="cookieName" type="text" th:value="${cookieName}"/>
-<input type="button" id="setCookieName" value="Set Cookie Name"/>
-<br/><br/>
-Login Cookie Value: <input id="cookieValue" type="text" th:value="${cookieValue}"/>
-<input type="button" id="setCookieValue" value="Set Cookie Value"/>
+<input type="button" id="fateIt" value="FATE It Up"/>
 
 <script src="/js/main.js"></script>
 </body>
