@@ -124,10 +124,15 @@ public class DriveController {
 
         for (int i = 0; i < run; i++) {
             OvercomeResult result = new OvercomeResult(difficulty, randomFateRoll(bonus));
+            boolean boost = false;
             for (int j = 0; j < helpers; j++) {
-                if (randomFateRoll(bonus) >= advantageDifficulty) {
+                int helpRoll = randomFateRoll(bonus);
+                if (!boost && helpRoll >= advantageDifficulty) {
                     result.addSuccessfulHelper();
                     totalAdvantages++;
+                    if (helpRoll == advantageDifficulty) {
+                        boost = true;
+                    }
                 } else {
                     result.addFailedHelper();
                 }
