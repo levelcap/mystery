@@ -1,4 +1,3 @@
-<script type="text/javascript">
 ;(function($) {
     $(document).ready(function() {
         var $img = $("#image").imgNotes({
