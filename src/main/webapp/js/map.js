@@ -1,3 +1,3 @@
-$(function () {
-    console.log("Allo");
-});
+(function($) {
+    $("#image").imgNotes({canEdit: true});
+})(JQuery);
