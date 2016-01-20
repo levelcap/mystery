@@ -11,9 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -109,26 +107,58 @@ public class DriveController {
     }
 
     @RequestMapping("/api/fate")
-    public List<OvercomeResult> testObstacle(@RequestParam(value = "difficulty") Integer difficulty,
+    public Map<String,Object> testObstacle(@RequestParam(value = "difficulty") Integer difficulty,
                                 @RequestParam(value = "bonus") Integer bonus,
                                 @RequestParam(value = "advantageDifficulty") Integer advantageDifficulty,
-                                @RequestParam(value = "helpers") Integer helpers) {
+                                @RequestParam(value = "helpers") Integer helpers,
+                                @RequestParam(value = "run") Integer run) {
 
+        Map<String,Object> analysis = new HashMap<String,Object>();
         List<OvercomeResult> results = new ArrayList<OvercomeResult>();
 
-        for (int i = 0; i < 100; i++) {
+        Integer totalFailures = 0;
+        Integer totalTies = 0;
+        Integer totalSuccesses = 0;
+        Integer totalSuccessesWithStyle = 0;
+        Integer totalAdvantages = 0;
+
+        for (int i = 0; i < run; i++) {
             OvercomeResult result = new OvercomeResult(difficulty, randomFateRoll(bonus));
             for (int j = 0; j < helpers; j++) {
                 if (randomFateRoll(bonus) >= advantageDifficulty) {
                     result.addSuccessfulHelper();
+                    totalAdvantages++;
                 } else {
                     result.addFailedHelper();
                 }
             }
             result.calculateOutcome();
+            switch (result.getOutcome()) {
+                case FAIL:
+                    totalFailures++;
+                    break;
+                case TIE:
+                    totalTies++;
+                    break;
+                case SUCCESS:
+                    totalSuccesses++;
+                    break;
+                case SUCCESS_WITH_STYLE:
+                    totalSuccessesWithStyle++;
+                    break;
+            }
             results.add(result);
         }
-        return results;
+
+        Double averageAdvantages = (double) (totalAdvantages / run);
+
+        analysis.put("Failures", totalFailures);
+        analysis.put("Ties", totalTies);
+        analysis.put("Successes", totalSuccesses);
+        analysis.put("With Style", totalSuccessesWithStyle);
+        analysis.put("Average Advantages", averageAdvantages);
+        analysis.put("results", results);
+        return analysis;
     }
 
     private int randomFateRoll(int bonus) {
