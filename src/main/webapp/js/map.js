@@ -2,7 +2,7 @@
 (function ($) {
     $(document).ready(function () {
         var $img = $("#image").imgNotes({
-            anEdit: true,
+            canEdit: true,
             onAdd: function () {
                 this.options.vAll = "bottom";
                 this.options.hAll = "middle";
