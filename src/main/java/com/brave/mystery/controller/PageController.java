@@ -34,4 +34,14 @@ public class PageController {
         return "index";
 	}
 
+    @RequestMapping("/map")
+    public String mapPage(Model model) {
+        try {
+
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return "map";
+    }
+
 }
