@@ -1,5 +1,6 @@
 package com.brave.mystery.controller;
 
+import com.brave.mystery.model.OvercomeResult;
 import com.brave.mystery.services.DriveService;
 import com.brave.mystery.services.PuzzlePageService;
 import com.google.api.client.auth.oauth2.Credential;
@@ -10,6 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
@@ -102,6 +106,34 @@ public class DriveController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @RequestMapping("/api/fate")
+    public List<OvercomeResult> testObstacle(@RequestParam(value = "difficulty") Integer difficulty,
+                                @RequestParam(value = "bonus") Integer bonus,
+                                @RequestParam(value = "advantageDifficulty") Integer advantageDifficulty,
+                                @RequestParam(value = "helpers") Integer helpers) {
+
+        List<OvercomeResult> results = new ArrayList<OvercomeResult>();
+
+        for (int i = 0; i < 100; i++) {
+            OvercomeResult result = new OvercomeResult(difficulty, randomFateRoll(bonus));
+            for (int j = 0; j < helpers; j++) {
+                if (randomFateRoll(bonus) >= advantageDifficulty) {
+                    result.addSuccessfulHelper();
+                } else {
+                    result.addFailedHelper();
+                }
+            }
+            result.calculateOutcome();
+            results.add(result);
+        }
+        return results;
+    }
+
+    private int randomFateRoll(int bonus) {
+        Random rand = new Random();
+        return (-4 + rand.nextInt((4 - -4) + 1)) + bonus;
     }
 
     class GenerationRunner implements Runnable {

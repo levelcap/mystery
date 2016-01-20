@@ -1,6 +1,5 @@
 package com.brave.mystery.services;
 
-import org.apache.commons.codec.binary.Base64;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.helper.StringUtil;
