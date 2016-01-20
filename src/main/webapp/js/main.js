@@ -27,7 +27,8 @@ $(function () {
             $("#resultTableBody").html("");
             for (i = 0; i < data.results.length; i++) {
                 var result = data.results[i];
-                $("#resultTableBody").append('<tr><td>' + i + '</td><td>' + result.outcome + '</td><td>' + result.difficulty  + '</td><td>' + result.primaryRoll + '</td><td>' + result.successfulHelpers + '</td><td>' + result.failedHelpers + '</td></tr>');
+                var runNum = i + 1;
+                $("#resultTableBody").append('<tr><td>' + runNum + '</td><td>' + result.outcome + '</td><td>' + result.difficulty  + '</td><td>' + result.primaryRoll + '</td><td>' + result.successfulHelpers + '</td><td>' + result.failedHelpers + '</td></tr>');
             }
         });
     });

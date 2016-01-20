@@ -120,7 +120,7 @@ public class DriveController {
         Integer totalTies = 0;
         Integer totalSuccesses = 0;
         Integer totalSuccessesWithStyle = 0;
-        Integer totalAdvantages = 0;
+        Double totalAdvantages = 0.0;
 
         for (int i = 0; i < run; i++) {
             OvercomeResult result = new OvercomeResult(difficulty, randomFateRoll(bonus));
@@ -150,7 +150,7 @@ public class DriveController {
             results.add(result);
         }
 
-        Integer averageAdvantages = totalAdvantages / run;
+        Double averageAdvantages = totalAdvantages / run;
 
         analysis.put("fails", totalFailures);
         analysis.put("ties", totalTies);
