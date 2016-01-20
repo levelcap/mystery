@@ -132,6 +132,7 @@ public class DriveController {
                     totalAdvantages++;
                     if (helpRoll == advantageDifficulty) {
                         boost = true;
+                        result.setBooster(j + 1);
                     }
                 } else {
                     result.addFailedHelper();

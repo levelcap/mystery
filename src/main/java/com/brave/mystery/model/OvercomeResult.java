@@ -12,6 +12,7 @@ public class OvercomeResult {
     private int primaryRoll;
     private int successfulHelpers = 0;
     private int failedHelpers = 0;
+    private int booster = 0;
 
     public OvercomeResult(int difficulty, int primaryRoll) {
         this.difficulty = difficulty;
@@ -56,6 +57,14 @@ public class OvercomeResult {
 
     public void setFailedHelpers(int failedHelpers) {
         this.failedHelpers = failedHelpers;
+    }
+
+    public int getBooster() {
+        return booster;
+    }
+
+    public void setBooster(int booster) {
+        this.booster = booster;
     }
 
     public void addSuccessfulHelper() {
