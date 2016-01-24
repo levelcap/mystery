@@ -6,39 +6,40 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
 </head>
 <body>
-<h2>FAE Obstacle Tester</h2>
+<div class="page">
+    <h2>FAE Obstacle Tester</h2>
 
-Obstacle Difficulty: <input id="difficulty" type="text" />
-<br/><br/>
-Highest Approach Bonus: <input id="bonus" type="text" value="3" />
-<br/><br/>
-Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
-<br/><br/>
-# of Advantage Attempers: <input id="helpers" type="text" value="2" />
-<br/><br/>
-# of Times to Test this Obstacle: <input id="run" type="text" />
-<br/><br/>
-<input type="button" id="fateIt" value="FATE It Up"/>
+    Obstacle Difficulty: <input id="difficulty" type="text"/>
+    <br/><br/>
+    Highest Approach Bonus: <input id="bonus" type="text" value="3"/>
+    <br/><br/>
+    Create an Advantage Difficulty: <input id="advantageDifficulty" type="text"/>
+    <br/><br/>
+    # of Advantage Attempers: <input id="helpers" type="text" value="2"/>
+    <br/><br/>
+    # of Times to Test this Obstacle: <input id="run" type="text"/>
+    <br/><br/>
+    <input type="button" id="fateIt" value="FATE It Up"/>
 
-<div id="results">
-    <div id="failures">
-        <b>Failures: </b> <span id="failSpan"></span>
-    </div>
-    <div id="ties">
-        <b>Ties: </b> <span id="tieSpan"></span>
-    </div>
-    <div id="success">
-        <b>Successes: </b> <span id="successSpan"></span>
-    </div>
-    <div id="withstyle">
-        <b>Successes With Style: </b> <span id="withstyleSpan"></span>
-    </div>
-    <div id="withstyle">
-        <b>Average Advantages Created: </b> <span id="average"></span>
-    </div>
+    <div id="results">
+        <div id="failures">
+            <b>Failures: </b> <span id="failSpan"></span>
+        </div>
+        <div id="ties">
+            <b>Ties: </b> <span id="tieSpan"></span>
+        </div>
+        <div id="success">
+            <b>Successes: </b> <span id="successSpan"></span>
+        </div>
+        <div id="withstyle">
+            <b>Successes With Style: </b> <span id="withstyleSpan"></span>
+        </div>
+        <div id="withstyle">
+            <b>Average Advantages Created: </b> <span id="average"></span>
+        </div>
 
-    <table id="resultTable">
-        <thead>
+        <table id="resultTable">
+            <thead>
             <tr>
                 <th>Run #</th>
                 <th>Outcome</th>
@@ -48,13 +49,13 @@ Create an Advantage Difficulty: <input id="advantageDifficulty" type="text" />
                 <th>Failed Helpers</th>
                 <th>Booster Helper # (0 = No Boost!)</th>
             </tr>
-        </thead>
-        <tbody id="resultTableBody">
+            </thead>
+            <tbody id="resultTableBody">
 
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
 </div>
-
 <script src="/js/main.js"></script>
 </body>
 </html>
