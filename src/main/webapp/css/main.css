@@ -28,7 +28,7 @@ body {
     -webkit-box-shadow: 0 0 30px #000000;
     -moz-box-shadow: 0 0 30px #000000;
     -o-box-shadow: 0 0 30px #000000;
-    padding: 25px 0 15px;
+    padding: 25px 15px 15px 15px;
     position: relative;
 }
 
