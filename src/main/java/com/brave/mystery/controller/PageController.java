@@ -21,18 +21,22 @@ public class PageController {
 	@RequestMapping("/")
 	public String index(Model model) {
         try {
-            model.addAttribute("authUrl", driveService.getAuthorizationUrl("cohen.davids@gmail.com", null));
-            model.addAttribute("basePage", puzzlePageService.getBasePage());
-            model.addAttribute("parsePage", puzzlePageService.getParsePage());
-            model.addAttribute("prefix", puzzlePageService.getPrefix());
-            model.addAttribute("titleCut", puzzlePageService.getTitleCut());
-            model.addAttribute("cookieName", puzzlePageService.getCookieName());
-            model.addAttribute("cookieValue", puzzlePageService.getCookieValue());
+
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }
         return "index";
 	}
+
+    @RequestMapping("/obstacle")
+    public String obstacleTest(Model model) {
+        try {
+
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return "obstacle";
+    }
 
     @RequestMapping("/map")
     public String mapPage(Model model) {
