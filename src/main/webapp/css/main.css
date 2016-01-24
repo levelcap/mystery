@@ -10,3 +10,436 @@ th, td {
     border: 1px solid black;
     padding: 10px;
 }
+
+body {
+    margin: 0;
+    padding: 0;
+    background: url(/images/chardb-bg.jpg);
+}
+
+.page {
+    background: url(/images/paper.jpg) top left repeat;
+    background-size: cover;
+    width: 1320px;
+    max-width: 100%;
+    min-width: 768px;
+    margin: 30px auto;
+    box-shadow: 0 0 30px #000000;
+    -webkit-box-shadow: 0 0 30px #000000;
+    -moz-box-shadow: 0 0 30px #000000;
+    -o-box-shadow: 0 0 30px #000000;
+    padding: 25px 0 15px;
+    position: relative;
+}
+
+#leftTape {
+    position: absolute;
+    height: 120px;
+    top: -35px;
+    left: -50px;
+}
+
+#rightTape {
+    position: absolute;
+    height: 120px;
+    top: -35px;
+    right: -50px;
+}
+
+#pen {
+    position: absolute;
+    bottom: -275px;
+    right: 10px;
+}
+
+#pen2 {
+    position: absolute;
+    bottom: -140px;
+    right: 10px;
+}
+
+header {
+    position: relative;
+    height: 50px;
+}
+
+header ul {
+    position: absolute;
+    right: 25px;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style: none;
+    padding: 0;
+}
+
+.container {
+    width: 100% !important;
+}
+
+section {
+    padding: 25px;
+}
+
+#editContainer, #detailContainer {
+    margin: 25px;
+    position: relative;
+}
+
+#characterSection, #settingSection, #locationSection {
+    padding: 0px;
+}
+
+#settingSection {
+    border: 1px solid rgba(200, 200, 200, 1);
+}
+
+#settingSection {
+    margin-top: 50px;
+}
+
+#settingNav {
+    position: absolute;
+    top: -43px;
+    left: -.5px;
+}
+
+#settingNav div {
+    font-family: 'Metamorphous', cursive;
+    font-size: 16px;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid rgba(200, 200, 200, 1);
+    display: inline-block;
+    cursor: pointer;
+}
+
+#settingNav div:hover, #settingNav .active {
+    background-color: rgba(200, 200, 200, 1);
+    color: white;
+}
+
+.userSub {
+    display: inline-block;
+    width: 30%;
+    padding-bottom: 150px;
+    vertical-align: top;
+}
+
+h1 {
+    font-family: 'Metamorphous', cursive;
+    padding-left: 0;
+    padding-bottom: 10px;
+    font-size: 25px;
+}
+
+h2 {
+    display: block;
+    width: 100%;
+    font-family: 'Metamorphous', cursive;
+    padding-left: 35px;
+    padding-bottom: 0px;
+    font-size: 25px;
+}
+
+#featuredCharacter {
+    border: 1px solid rgb(195, 195, 199);
+    width: 95%;
+    margin: auto;
+    height: 300px;
+    margin-top: 20px;
+    overflow-y: scroll;
+}
+
+.homeDiv {
+    border: 1px solid rgb(195, 195, 199);
+    width: 95%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.browseSub {
+    display: inline-block;
+    width: 45%;
+    padding: 2%;
+}
+
+header ul li {
+    display: inline-block;
+    border: 2px solid #0000A0;
+    font-family: 'Metamorphous', cursive;
+    color: #0000A0;
+    font-weight: bold;
+    font-size: 16px;
+    padding: 10px;
+    cursor: pointer;
+}
+
+header ul li:hover {
+    background-color: #0000A0;
+    color: white;
+}
+
+.handwrite {
+    font-family: 'Covered By Your Grace';
+    color: #0000A0;
+}
+
+#characterSection {
+    display: table;
+    width: 100%;
+}
+
+.subsection {
+    padding: 20px;
+    vertical-align: top;
+}
+
+#name {
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+#basicInfo {
+    display: table-cell;
+    width: 25%;
+}
+
+#basicInfo input, #basicInfo select {
+    border: 1px solid rgb(195, 195, 199);
+    background-color: transparent;
+    font-family: 'Covered By Your Grace';
+    font-size: 20px;
+    color: #0000A0;
+    width: 200px;
+}
+
+#basicInfo img {
+    max-width: 100%;
+    padding-top: 10px;
+}
+
+#details, #members, #locations {
+    display: table-cell;
+    width: 75%;
+}
+
+#characterControls {
+    padding-top: 20px;
+    padding-right: 35px;
+    clear: both;
+    float: right;
+}
+
+#description {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.form-control {
+    border: none;
+    border-color: transparent;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-transition: none;
+    transition: none;
+    background-color: transparent;
+}
+
+.ta-root.focussed .ta-scroll-window.form-control {
+    border: none;
+    border-color: transparent;
+    outline: 0px;
+    -webkit-box-shadow: none;
+    outline-color: transparent;
+}
+
+.infoline {
+    display: table-row;
+    font-size: 12px;
+}
+
+.infoline span {
+    display: table-cell;
+    padding-left: 10px;
+    padding-top: 10px;
+}
+
+.charDbButton {
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid #A52A2A;
+    background-color: white;
+    width: 100px;
+    text-align: center;
+    font-weight: bold;
+    margin-left: 25px;
+    cursor: pointer;
+}
+
+.charDbButton:hover {
+    background-color: #A52A2A;
+    color: white;
+}
+
+#saveUsername {
+    margin-left: 10px;
+    padding: 2px;
+    width: 65px;
+}
+
+#loginBody {
+    background-image: url(/images/paper_fibers.png);
+}
+
+#loginDiv {
+    width: 600px;
+    margin: auto;
+    margin-top: 30px;
+    padding: 30px;
+    border: 2px solid transparent;
+    border-radius: 2px;
+    box-shadow: 2px 2px 1px #888888;
+    background-color: rgba(255, 255, 255, .5);
+}
+
+#loginDiv input {
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+    margin-top: 15px;
+    background-color: transparent;
+    padding: 0;
+}
+
+#loginButton {
+    font-weight: bold;
+}
+
+.longInput {
+    width: 350px;
+}
+
+#loginDiv input:focus {
+    border: none;
+    outline: none;
+}
+
+#loginLinks {
+    width: 100%;
+    background-repeat: no-repeat;
+    height: 75px;
+    background-position-x: center;
+    text-align: center;
+}
+
+#loginLinks a {
+    color: black;
+    text-decoration: none;
+}
+
+#loginLinks span {
+    display: inline-block;
+    margin-top: 35px;
+    margin-right: 30px;
+    margin-left: 30px;
+}
+
+.shareLink {
+    margin-top: 20px;
+    font-family: 'Metamorphous', cursive;
+    font-size: 14px;
+}
+
+.shareLink label {
+    font-weight: bold;
+    margin-right: 5px;
+}
+
+.shareLink a {
+
+}
+
+#textContainer {
+    width: 100% !important;
+}
+
+.linkedList {
+    padding-top: 20px;
+    font-family: 'Metamorphous', cursive;
+    font-size: 14px;
+}
+
+.linkedList li {
+    margin-top: 15px;
+}
+
+.deleteSpan {
+    font-family: 'Covered By Your Grace';
+    font-size: 20px;
+    color: #0000A0;
+    cursor: pointer;
+
+}
+
+.progressDiv, .questInfo {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.progressDiv > label, .questInfo label {
+    margin-right: 10px;
+    font-family: 'Metamorphous', cursive;
+    font-size: 16px;
+    color: #000000;
+    width: 120px;
+}
+
+.progressDiv > label {
+    vertical-align: top;
+}
+
+.questInfo > label {
+    vertical-align: bottom;
+}
+
+.questInfo div {
+    display: inline-block;
+    font-size: 25px;
+}
+
+.meter {
+    display: inline-block;
+    height: 20px;
+    width: 300px;
+    position: relative;
+    background: transparent;
+    border: 1px dashed #0000A0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 0px;
+}
+
+.meter > span {
+    display: block;
+    height: 100%;
+    background-image: url(/images/penbar.png);
+    position: relative;
+    overflow: hidden;
+}
+
+/** Admin Page **/
+.userHeader {
+    font-size: 16px;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.userCharacter {
+    margin-left: 5px;
+}
