@@ -32,4 +32,12 @@ $(function () {
             }
         });
     });
+
+    $( ".npcCard" ).hover(
+        function() {
+            $( this ).find(".charInfo").slideDown( 400 );
+        }, function() {
+            $( this ).find(".charInfo").slideUp( 400 );
+        }
+    );
 });

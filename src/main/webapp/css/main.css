@@ -1,12 +1,12 @@
-div {
+.obstaclePage div {
     margin-top: 15px;
 }
-table {
+.obstaclePage table {
     margin-top: 20px;
     border-collapse: collapse;
 }
 
-th, td {
+.obstaclePage th, td {
     border: 1px solid black;
     padding: 10px;
 }
@@ -15,6 +15,10 @@ body {
     margin: 0;
     padding: 0;
     background: url(/images/chardb-bg.jpg);
+}
+
+a {
+    text-decoration: none;
 }
 
 .page {
@@ -431,6 +435,43 @@ header ul li:hover {
     background-image: url(/images/penbar.png);
     position: relative;
     overflow: hidden;
+}
+
+.npcCard {
+    position: relative;
+    width: 25%;
+    display: inline-block;
+    margin: 0px 10px 0px 10px;
+    overflow: hidden;
+    border: 2px solid #E6E6FD;
+    box-shadow: 5px 5px 10px #888888;
+}
+
+.charName {
+    position: absolute;
+    font-family: 'Metamorphous', cursive;
+    top: 0px;
+    width: 100%;
+    text-align: center;
+    background: rgba(0,0,0,.5);
+    font-size: 20px;
+    color: white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.charInfo {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    padding: 10px 0px 10px 10px;
+    background: rgba(0,0,0,.8);
+    font-size: 16px;
+    color: white;
+}
+
+.charInfo label {
+    font-weight: bold;
 }
 
 /** Admin Page **/
